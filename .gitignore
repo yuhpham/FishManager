@@ -5,3 +5,5 @@
 /.vs
 /KoiFishManager/KoiFishManager.API/bin/Debug/net8.0
 /KoiFishManager/.vs
+/KoiFishManager/bin
+/KoiFishManager/obj
