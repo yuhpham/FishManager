@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35506.116
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KoiFishManager.API", "KoiFishManager.API\KoiFishManager.API.csproj", "{E23CC1F3-9DB1-4E26-98C2-5804B95F970D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KoiFishManager.Models", "KoiFishManager.Models\KoiFishManager.Models.csproj", "{B427780A-1B1E-430D-8308-93206B91F684}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KoiFishManager.Web", "KoiFishManager.Web\KoiFishManager.Web.csproj", "{DF18D49A-EC1B-4770-8DCD-599E804FF010}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E23CC1F3-9DB1-4E26-98C2-5804B95F970D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E23CC1F3-9DB1-4E26-98C2-5804B95F970D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E23CC1F3-9DB1-4E26-98C2-5804B95F970D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E23CC1F3-9DB1-4E26-98C2-5804B95F970D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B427780A-1B1E-430D-8308-93206B91F684}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B427780A-1B1E-430D-8308-93206B91F684}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B427780A-1B1E-430D-8308-93206B91F684}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B427780A-1B1E-430D-8308-93206B91F684}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF18D49A-EC1B-4770-8DCD-599E804FF010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF18D49A-EC1B-4770-8DCD-599E804FF010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF18D49A-EC1B-4770-8DCD-599E804FF010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF18D49A-EC1B-4770-8DCD-599E804FF010}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

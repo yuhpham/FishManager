@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "foKGxZLnZQhLs5Uq1wyh4NARhSKbHgyx37uu2cfZTGk=",
+  "Source": "KoiFishManager.API",
+  "BasePath": "_content/KoiFishManager.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}
