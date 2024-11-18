@@ -9,10 +9,10 @@ namespace KoiFishManager.Models
     public class PondCreateRequest
     {
         public int Id { get; set; }  
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public double Size { get; set; }
         public double Depth { get; set; }
-        public string WaterQuality { get; set; }
+        public string WaterQuality { get; set; } = string.Empty;
     }
 
 }

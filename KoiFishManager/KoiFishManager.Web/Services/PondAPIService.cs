@@ -1,14 +1,7 @@
-﻿using Microsoft.AspNetCore.WebUtilities;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
+﻿using KoiFishManager.Models;
 using System.Net.Http.Json;
-using System.Threading.Tasks;
-using KoiFishManager.Models;
-using KoiFishManager.Models.SeedWork;
-using KoiFishManager.Web.Services;
 
-namespace KoiFishManager.Api.Services
+namespace KoiFishManager.Web.Services
 {
     public class PondAPIService : IPondService
     {
@@ -31,20 +24,20 @@ namespace KoiFishManager.Api.Services
 
         public async Task CreatePondAsync(PondRequest request)
         {
-            var response = await _httpClient.PostAsJsonAsync("api/pond", request);
-            response.EnsureSuccessStatusCode();
+            HttpResponseMessage response = await _httpClient.PostAsJsonAsync("api/pond", request);
+            _ = response.EnsureSuccessStatusCode();
         }
 
         public async Task UpdatePondAsync(int id, PondRequest request)
         {
-            var response = await _httpClient.PutAsJsonAsync($"api/pond/{id}", request);
-            response.EnsureSuccessStatusCode();
+            HttpResponseMessage response = await _httpClient.PutAsJsonAsync($"api/pond/{id}", request);
+            _ = response.EnsureSuccessStatusCode();
         }
 
         public async Task DeletePondAsync(int id)
         {
-            var response = await _httpClient.DeleteAsync($"api/pond/{id}");
-            response.EnsureSuccessStatusCode();
+            HttpResponseMessage response = await _httpClient.DeleteAsync($"api/pond/{id}");
+            _ = response.EnsureSuccessStatusCode();
         }
     }
 }

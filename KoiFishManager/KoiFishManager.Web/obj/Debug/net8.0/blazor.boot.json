@@ -1,7 +1,7 @@
 {
   "mainAssemblyName": "KoiFishManager.Web",
   "resources": {
-    "hash": "sha256-zyone9YUF4Av8p9p8m7AIhdsKR8VL5SKhpkArefeZVI=",
+    "hash": "sha256-oqcdWTvVXl5CWfStSLdmL6dlmvZhd1PiUbpAQVkGBTo=",
     "jsModuleNative": {
       "dotnet.native.js": "sha256-VdKq87/z5NIxZKmuM+fv38XF+RcEb/bg3jVBwQSfwP4="
     },
@@ -214,12 +214,12 @@
       "mscorlib.wasm": "sha256-04e4k5XU8HWGB/dq/2+j84xzzGPflTs0IYWI0OxogVc=",
       "netstandard.wasm": "sha256-gnGZURPnoSmjXuYNCOJi5tt8qn2LRImWgue1Ru3/TDQ=",
       "System.Private.CoreLib.wasm": "sha256-6w3jYr0arcp8jnt4aeqh+AmqrLA6q7jl9rQYAwLzE0M=",
-      "KoiFishManager.Models.wasm": "sha256-DLrcc1Zqn/2dP+Edxbdq+6Om22SQo7vtPw3CRhzYCKY=",
-      "KoiFishManager.Web.wasm": "sha256-ivaZsLmfexJXAL/RKZcVzZvTaw2JdvT7It+rKpPz0Bw="
+      "KoiFishManager.Models.wasm": "sha256-99Zs2SiETHdLy/Ixn09gb1n+Zi8kYq3pukwbx1vpUns=",
+      "KoiFishManager.Web.wasm": "sha256-kQlulXSqr2nQHJLUjN80UbNn6gYnKrK/+Vqq5T4R8j8="
     },
     "pdb": {
-      "KoiFishManager.Models.pdb": "sha256-INbHBIZYKy8PnP5WMflLFIADZAoF+TU7jkPjjbY3UE0=",
-      "KoiFishManager.Web.pdb": "sha256-jTpkRufrEqh8/GCjCb6NCS9rmacJDBz9AQLDWS+kvxw="
+      "KoiFishManager.Models.pdb": "sha256-PWYEePHHgcJEurMzzgt1IrAyBhhP+u1W+LI0NMaFuIg=",
+      "KoiFishManager.Web.pdb": "sha256-9VyiEBIv1m0sAUkl1niaO32QyylbROdWR7s2HZDO7M4="
     }
   },
   "cacheBootResources": true,

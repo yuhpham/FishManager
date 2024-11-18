@@ -1,14 +1,8 @@
 using Blazored.LocalStorage;
 using Blazored.Toast;
+using KoiFishManager.Web.Services;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Threading.Tasks;
-using KoiFishManager.Web.Services;
-using KoiFishManager.Api.Services;
 
 namespace KoiFishManager.Web
 {
@@ -16,15 +10,15 @@ namespace KoiFishManager.Web
     {
         public static async Task Main(string[] args)
         {
-            var builder = WebAssemblyHostBuilder.CreateDefault(args);
+            WebAssemblyHostBuilder builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
-            builder.Services.AddBlazoredToast();         
-            builder.Services.AddTransient<IPondService, PondAPIService>();        
-            builder.Services.AddBlazoredLocalStorage();
-            builder.Services.AddAuthorizationCore();
-            builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
-            builder.Services.AddScoped<IAuthService, AuthService>();
-            builder.Services.AddScoped(sp => new HttpClient
+            _ = builder.Services.AddBlazoredToast();
+            _ = builder.Services.AddTransient<IPondService, PondAPIService>();
+            _ = builder.Services.AddBlazoredLocalStorage();
+            _ = builder.Services.AddAuthorizationCore();
+            _ = builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
+            _ = builder.Services.AddScoped<IAuthService, AuthService>();
+            _ = builder.Services.AddScoped(sp => new HttpClient
             {
                 BaseAddress = new Uri(builder.Configuration["BackendApiUrl"])
             });

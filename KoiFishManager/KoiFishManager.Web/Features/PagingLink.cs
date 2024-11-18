@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace KoiFishManager.Web.Features
+﻿namespace KoiFishManager.Web.Features
 {
     public class PagingLink
     {

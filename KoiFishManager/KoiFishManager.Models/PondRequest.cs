@@ -11,7 +11,7 @@ namespace KoiFishManager.Models
         public string Name { get; set; }
         public double Size { get; set; }
         public double Depth { get; set; }
-        public string WaterQuality { get; set; }
-     
+        public string WaterQuality { get; set; } = string.Empty;
+
     }
 }

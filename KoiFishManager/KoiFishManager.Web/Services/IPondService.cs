@@ -1,5 +1,4 @@
 ﻿using KoiFishManager.Models;
-using KoiFishManager.Models.SeedWork;
 
 namespace KoiFishManager.Web.Services
 {
@@ -10,7 +9,7 @@ namespace KoiFishManager.Web.Services
         Task CreatePondAsync(PondRequest request);
         Task UpdatePondAsync(int id, PondRequest request);
         Task DeletePondAsync(int id);
-       
+
     }
 
 }

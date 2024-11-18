@@ -6,7 +6,7 @@ using KoiFishManager.Api.Common;
 
 namespace KoiFishManager.Api.Entities
 {
-    public class PondStatus :BaseEntity
+    public class PondStatus : BaseEntity
     {
 
         [Key]

@@ -1,13 +1,8 @@
 ﻿using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace KoiFishManager.Web
 {
@@ -23,7 +18,7 @@ namespace KoiFishManager.Web
         }
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
-            var savedToken = await _localStorage.GetItemAsync<string>("authToken");
+            string? savedToken = await _localStorage.GetItemAsync<string>("authToken");
 
             if (string.IsNullOrWhiteSpace(savedToken))
             {
@@ -37,34 +32,34 @@ namespace KoiFishManager.Web
 
         public void MarkUserAsAuthenticated(string userName)
         {
-            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, userName) }, "apiauth"));
-            var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
+            ClaimsPrincipal authenticatedUser = new(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, userName) }, "apiauth"));
+            Task<AuthenticationState> authState = Task.FromResult(new AuthenticationState(authenticatedUser));
             NotifyAuthenticationStateChanged(authState);
         }
 
         public void MarkUserAsLoggedOut()
         {
-            var anonymousUser = new ClaimsPrincipal(new ClaimsIdentity());
-            var authState = Task.FromResult(new AuthenticationState(anonymousUser));
+            ClaimsPrincipal anonymousUser = new(new ClaimsIdentity());
+            Task<AuthenticationState> authState = Task.FromResult(new AuthenticationState(anonymousUser));
             NotifyAuthenticationStateChanged(authState);
         }
 
         private IEnumerable<Claim> ParseClaimsFromJwt(string jwt)
         {
-            var claims = new List<Claim>();
-            var payload = jwt.Split('.')[1];
-            var jsonBytes = ParseBase64WithoutPadding(payload);
-            var keyValuePairs = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonBytes);
+            List<Claim> claims = [];
+            string payload = jwt.Split('.')[1];
+            byte[] jsonBytes = ParseBase64WithoutPadding(payload);
+            Dictionary<string, object>? keyValuePairs = JsonSerializer.Deserialize<Dictionary<string, object>>(jsonBytes);
 
-            keyValuePairs.TryGetValue(ClaimTypes.Role, out object roles);
+            _ = keyValuePairs.TryGetValue(ClaimTypes.Role, out object roles);
 
             if (roles != null)
             {
                 if (roles.ToString().Trim().StartsWith("["))
                 {
-                    var parsedRoles = JsonSerializer.Deserialize<string[]>(roles.ToString());
+                    string[]? parsedRoles = JsonSerializer.Deserialize<string[]>(roles.ToString());
 
-                    foreach (var parsedRole in parsedRoles)
+                    foreach (string parsedRole in parsedRoles)
                     {
                         claims.Add(new Claim(ClaimTypes.Role, parsedRole));
                     }
@@ -74,7 +69,7 @@ namespace KoiFishManager.Web
                     claims.Add(new Claim(ClaimTypes.Role, roles.ToString()));
                 }
 
-                keyValuePairs.Remove(ClaimTypes.Role);
+                _ = keyValuePairs.Remove(ClaimTypes.Role);
             }
 
             claims.AddRange(keyValuePairs.Select(kvp => new Claim(kvp.Key, kvp.Value.ToString())));

@@ -9,8 +9,8 @@ namespace KoiFishManager.Models
     public class RegisterResponse
     {
         public bool Successful { get; set; }
-        public string Error { get; set; }
-        public string Message { get; set; }
+        public string Error { get; set; } = string.Empty;
+        public string Message { get; set; } = string.Empty;
     }
 
 }

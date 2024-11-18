@@ -1,14 +1,9 @@
 ﻿using Blazored.LocalStorage;
+using KoiFishManager.Models;
 using Microsoft.AspNetCore.Components.Authorization;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
-using System.Threading.Tasks;
-using KoiFishManager.Models;
 
 namespace KoiFishManager.Web.Services
 {
@@ -28,9 +23,9 @@ namespace KoiFishManager.Web.Services
         public async Task<LoginResponse> Login(LoginRequest loginRequest)
         {
 
-            var result = await _httpClient.PostAsJsonAsync("/api/login", loginRequest);
-            var content = await result.Content.ReadAsStringAsync();
-            var loginResponse = JsonSerializer.Deserialize<LoginResponse>(content,
+            HttpResponseMessage result = await _httpClient.PostAsJsonAsync("/api/login", loginRequest);
+            string content = await result.Content.ReadAsStringAsync();
+            LoginResponse? loginResponse = JsonSerializer.Deserialize<LoginResponse>(content,
                 new JsonSerializerOptions()
                 {
                     PropertyNameCaseInsensitive = true
