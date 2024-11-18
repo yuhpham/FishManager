@@ -5,5 +5,9 @@
 /.vs
 /KoiFishManager/KoiFishManager.API/bin/Debug/net8.0
 /KoiFishManager/.vs
-/KoiFishManager/bin
-/KoiFishManager/obj
+/KoiFishManager/KoiFishManager.API/bin
+/KoiFishManager/KoiFishManager.Models/bin
+/KoiFishManager/KoiFishManager.Web/bin
+/KoiFishManager/KoiFishManager.API/obj
+/KoiFishManager/KoiFishManager.Models/obj
+/KoiFishManager/KoiFishManager.Web/obj
