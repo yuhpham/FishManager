@@ -16,5 +16,7 @@ namespace KoiFishManager.Api.Entities
         [MaxLength(250)]
         [Required]
         public string LastName { get; set; }
+
+        public List<Pond> Ponds { get; set; } = new List<Pond> { };
     }
 }

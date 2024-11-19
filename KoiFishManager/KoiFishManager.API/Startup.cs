@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using KoiFishManager.Api.Services;
+using KoiFishManager.API.Services;
 
 namespace KoiFishManager.Api
 {
@@ -77,6 +78,7 @@ namespace KoiFishManager.Api
             services.AddHttpContextAccessor(); // Đăng ký HttpContextAccessor
             services.AddScoped<IUserContextService, UserContextService>();
             services.AddScoped<IPondService, PondService>();
+            services.AddScoped<IKoiFishService, KoiFishService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

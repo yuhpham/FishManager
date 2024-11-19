@@ -14,11 +14,13 @@ namespace KoiFishManager.Web
             builder.RootComponents.Add<App>("#app");
             _ = builder.Services.AddBlazoredToast();
             _ = builder.Services.AddTransient<IPondService, PondAPIService>();
+            _ = builder.Services.AddTransient<IKoiFishService, KoiFishAPIService>();
             _ = builder.Services.AddBlazoredLocalStorage();
             _ = builder.Services.AddAuthorizationCore();
             _ = builder.Services.AddScoped<AuthenticationStateProvider, ApiAuthenticationStateProvider>();
             _ = builder.Services.AddScoped<IAuthService, AuthService>();
             _ = builder.Services.AddScoped(sp => new HttpClient
+
             {
                 BaseAddress = new Uri(builder.Configuration["BackendApiUrl"])
             });

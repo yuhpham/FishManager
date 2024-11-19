@@ -10,5 +10,7 @@ namespace KoiFishManager.Models.KoiFish
         public double Size { get; set; }          // Kích thước cá Koi
         public string Origin { get; set; } = string.Empty;         // Xuất xứ cá Koi
         public string HealthStatus { get; set; } = string.Empty;     // Tình trạng sức khỏe
+        public DateTime CreatedAt { get; set; } 
+        public int PondId { get; set; }
     }
 }
