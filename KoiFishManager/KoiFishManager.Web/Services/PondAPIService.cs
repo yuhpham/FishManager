@@ -1,4 +1,4 @@
-﻿using KoiFishManager.Models;
+﻿using KoiFishManager.Models.Pond;
 using System.Net.Http.Json;
 
 namespace KoiFishManager.Web.Services

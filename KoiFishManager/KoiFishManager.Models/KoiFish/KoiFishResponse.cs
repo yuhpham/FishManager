@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KoiFishManager.Models
+namespace KoiFishManager.Models.KoiFish
 {
     public class KoiFishResponse
     {

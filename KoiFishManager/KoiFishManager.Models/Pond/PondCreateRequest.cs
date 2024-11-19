@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KoiFishManager.Models
+namespace KoiFishManager.Models.Pond
 {
-    public class PondRequest
+    public class PondCreateRequest
     {
-        public string Name { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; } = string.Empty;
         public double Size { get; set; }
         public double Depth { get; set; }
         public string WaterQuality { get; set; } = string.Empty;
-
     }
+
 }

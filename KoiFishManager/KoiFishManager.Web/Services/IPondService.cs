@@ -1,4 +1,4 @@
-﻿using KoiFishManager.Models;
+﻿using KoiFishManager.Models.Pond;
 
 namespace KoiFishManager.Web.Services
 {

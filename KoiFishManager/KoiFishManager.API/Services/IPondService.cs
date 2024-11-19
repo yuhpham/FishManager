@@ -1,9 +1,5 @@
-﻿
-using KoiFishManager.Api.Entities;
-using KoiFishManager.Models;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using KoiFishManager.Models;
+using KoiFishManager.Models.Pond;
 
 namespace KoiFishManager.Api.Services
 {
@@ -14,13 +10,14 @@ namespace KoiFishManager.Api.Services
 
         // Lấy tất cả hồ cá của người dùng
         Task<List<PondResponse>> GetAllByUserIdAsync(Guid userId);
-        Task<(List<PondResponse>, int)> GetPagedByUserIdAsync(Guid userId, int page, int pageSize);
+
+        Task<PagedResult<PondResponse>> GetPagedByUserIdAsync(Guid userId, int page, int pageSize);
 
         // Lấy hồ cá theo ID
         Task<PondResponse> GetByIdAsync(int id);
 
         // Cập nhật hồ cá
-        Task<PondResponse> UpdateAsync(int id,PondRequest pond);
+        Task<PondResponse> UpdateAsync(int id, PondRequest pond);
 
         // Xóa hồ cá
         Task<bool> DeleteAsync(int id);

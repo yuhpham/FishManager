@@ -1,7 +1,8 @@
-﻿using System;
+﻿using KoiFishManager.Models.KoiFish;
+using System;
 using System.Collections.Generic;
 
-namespace KoiFishManager.Models
+namespace KoiFishManager.Models.Pond
 {
     public class PondResponse
     {

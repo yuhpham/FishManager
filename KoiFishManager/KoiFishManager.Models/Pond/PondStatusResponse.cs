@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KoiFishManager.Models
+namespace KoiFishManager.Models.Pond
 {
     public class PondStatusResponse
     {

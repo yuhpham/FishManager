@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using KoiFishManager.Models.Pond;
+using KoiFishManager.Models.KoiFish;
 
 namespace KoiFishManager.Api.Services
 {
@@ -98,7 +100,7 @@ namespace KoiFishManager.Api.Services
         }
 
         // Phân trang hồ cá theo người dùng
-        public async Task<(List<PondResponse>, int)> GetPagedByUserIdAsync(Guid userId, int page, int pageSize)
+        public async Task<PagedResult<PondResponse>> GetPagedByUserIdAsync(Guid userId, int page, int pageSize)
         {
             try
             {
@@ -116,7 +118,13 @@ namespace KoiFishManager.Api.Services
                     .ToListAsync();
 
                 var pondDtos = ponds.Select(ToDto).ToList();
-                return (pondDtos, totalItems);
+                return new PagedResult<PondResponse>
+                {
+                    Items = pondDtos,
+                    TotalItems = totalItems,
+                    PageSize = pageSize,
+                    CurrentPage = page
+                };
             }
             catch (Exception ex)
             {

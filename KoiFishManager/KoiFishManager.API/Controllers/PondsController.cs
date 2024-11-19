@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using KoiFishManager.Api.Services;
-using KoiFishManager.Models;
-using Microsoft.AspNetCore.Authorization;
+﻿using KoiFishManager.Api.Services;
+using KoiFishManager.Models.Pond;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace KoiFishManager.Api.Controllers
 {
@@ -25,7 +22,7 @@ namespace KoiFishManager.Api.Controllers
             _logger = logger;
         }
 
-        // Tạo hồ cá mới
+    
         [HttpPost]
         public async Task<IActionResult> CreatePond([FromBody] PondRequest createRequest)
         {
@@ -49,7 +46,7 @@ namespace KoiFishManager.Api.Controllers
             }
         }
 
-        // Lấy danh sách hồ cá của người dùng
+        
         [HttpGet("all")]
         public async Task<IActionResult> GetAllPonds()
         {
@@ -74,35 +71,33 @@ namespace KoiFishManager.Api.Controllers
             }
         }
 
-        // Lấy danh sách hồ cá có phân trang
-        [HttpGet]
+        
+        [HttpGet("page")]
         public async Task<IActionResult> GetPagedPonds([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
         {
             var userId = _userContextService.GetCurrentUserId();
+
             try
             {
-                var (ponds, totalItems) = await _pondService.GetPagedByUserIdAsync(userId, page, pageSize);
+               
+                var result = await _pondService.GetPagedByUserIdAsync(userId, page, pageSize);
 
-                var response = new
-                {
-                    Items = ponds,
-                    TotalItems = totalItems,
-                    Page = page,
-                    PageSize = pageSize,
-                    TotalPages = (int)Math.Ceiling((double)totalItems / pageSize)
-                };
+                
+                _logger.LogInformation("Paged ponds retrieved for user {UserId}, page {Page}, pageSize {PageSize}.", userId, page, pageSize);
 
-                _logger.LogInformation($"Paged ponds retrieved for user {userId}, page {page}, pageSize {pageSize}.");
-                return Ok(response);
+              
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error occurred while fetching paged ponds.");
+               
+                _logger.LogError(ex, "Error occurred while fetching paged ponds for user {UserId}.", userId);
+
+                
                 return StatusCode(500, new { message = "An error occurred while fetching the paged ponds." });
             }
         }
-
-        // Lấy thông tin hồ cá theo ID
+       
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPondById(int id)
         {
@@ -126,7 +121,7 @@ namespace KoiFishManager.Api.Controllers
             }
         }
 
-        // Cập nhật thông tin hồ cá
+       
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdatePond(int id, [FromBody] PondRequest updateRequest)
         {
@@ -154,7 +149,7 @@ namespace KoiFishManager.Api.Controllers
             }
         }
 
-        // Xóa hồ cá
+        
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePond(int id)
         {
