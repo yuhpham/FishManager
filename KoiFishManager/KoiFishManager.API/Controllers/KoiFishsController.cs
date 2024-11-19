@@ -5,9 +5,6 @@ using KoiFishManager.Models.KoiFish;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace KoiFishManager.API.Controllers
 {
@@ -34,7 +31,7 @@ namespace KoiFishManager.API.Controllers
         {
             try
             {
-                var response = await _koiFishService.AddAsync(pondId, request);
+                KoiFishResponse response = await _koiFishService.AddAsync(pondId, request);
                 return CreatedAtAction(nameof(GetKoiFishByIdAsync), new { id = response.Id }, response);
             }
             catch (Exception ex)
@@ -47,16 +44,12 @@ namespace KoiFishManager.API.Controllers
         [HttpGet()]
         public async Task<ActionResult<List<KoiFishResponse>>> GetAllKoiFishByUserIdAsync()
         {
-            var userId = _userContextService.GetCurrentUserId();
+            Guid userId = _userContextService.GetCurrentUserId();
             try
             {
-               
-                var response = await _koiFishService.GetAllByUserIdAsync(userId);
-                if (response == null || response.Count == 0)
-                {
-                    return NotFound(new { message = "No koi fish found for this user." });
-                }
-                return Ok(response);
+
+                List<KoiFishResponse> response = await _koiFishService.GetAllByUserIdAsync(userId);
+                return response == null || response.Count == 0 ? (ActionResult<List<KoiFishResponse>>)NotFound(new { message = "No koi fish found for this user." }) : (ActionResult<List<KoiFishResponse>>)Ok(response);
             }
             catch (Exception ex)
             {
@@ -70,12 +63,8 @@ namespace KoiFishManager.API.Controllers
         {
             try
             {
-                var response = await _koiFishService.GetByIdAsync(id);
-                if (response == null)
-                {
-                    return NotFound(new { message = "Koi fish not found." });
-                }
-                return Ok(response);
+                KoiFishDetailResponse response = await _koiFishService.GetByIdAsync(id);
+                return response == null ? (ActionResult<KoiFishDetailResponse>)NotFound(new { message = "Koi fish not found." }) : (ActionResult<KoiFishDetailResponse>)Ok(response);
             }
             catch (Exception ex)
             {
@@ -89,12 +78,8 @@ namespace KoiFishManager.API.Controllers
         {
             try
             {
-                var response = await _koiFishService.UpdateAsync(id, request);
-                if (response == null)
-                {
-                    return NotFound(new { message = "Koi fish not found." });
-                }
-                return Ok(response);
+                KoiFishResponse response = await _koiFishService.UpdateAsync(id, request);
+                return response == null ? (ActionResult<KoiFishResponse>)NotFound(new { message = "Koi fish not found." }) : (ActionResult<KoiFishResponse>)Ok(response);
             }
             catch (Exception ex)
             {
@@ -108,7 +93,7 @@ namespace KoiFishManager.API.Controllers
         {
             try
             {
-                var success = await _koiFishService.DeleteAsync(id);
+                bool success = await _koiFishService.DeleteAsync(id);
                 if (!success)
                 {
                     return NotFound(new { message = "Koi fish not found." });

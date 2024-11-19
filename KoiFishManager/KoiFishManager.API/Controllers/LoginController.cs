@@ -1,17 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using KoiFishManager.Api.Entities;
+using KoiFishManager.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-using KoiFishManager.Api.Entities;
-using KoiFishManager.Models;
 
 namespace KoiFishManager.Api.Controllers
 {
@@ -36,24 +30,30 @@ namespace KoiFishManager.Api.Controllers
         public async Task<IActionResult> Login([FromBody] LoginRequest login)
         {
             // find in DB
-            var user = await _userManager.FindByNameAsync(login.UserName);
-            if(user == null) return BadRequest(new LoginResponse { Successful = false, Error = "Username and password are invalid." });
+            User? user = await _userManager.FindByNameAsync(login.UserName);
+            if (user == null)
+            {
+                return BadRequest(new LoginResponse { Successful = false, Error = "Username and password are invalid." });
+            }
 
-            var result = await _signInManager.PasswordSignInAsync(login.UserName, login.Password, false, false);
+            Microsoft.AspNetCore.Identity.SignInResult result = await _signInManager.PasswordSignInAsync(login.UserName, login.Password, false, false);
 
-            if (!result.Succeeded) return BadRequest(new LoginResponse { Successful = false, Error = "Username and password are invalid." });
+            if (!result.Succeeded)
+            {
+                return BadRequest(new LoginResponse { Successful = false, Error = "Username and password are invalid." });
+            }
 
-            var claims = new[]
+            Claim[] claims = new[]
             {
                 new Claim(ClaimTypes.Name, login.UserName),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString())
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSecurityKey"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expiry = DateTime.Now.AddDays(Convert.ToInt32(_configuration["JwtExpiryInDays"]));
+            SymmetricSecurityKey key = new(Encoding.UTF8.GetBytes(_configuration["JwtSecurityKey"]));
+            SigningCredentials creds = new(key, SecurityAlgorithms.HmacSha256);
+            DateTime expiry = DateTime.Now.AddDays(Convert.ToInt32(_configuration["JwtExpiryInDays"]));
 
-            var token = new JwtSecurityToken(
+            JwtSecurityToken token = new(
                 _configuration["JwtIssuer"],
                 _configuration["JwtAudience"],
                 claims,
@@ -67,42 +67,36 @@ namespace KoiFishManager.Api.Controllers
 
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest register)
-        {
-            // Kiểm tra nếu dữ liệu đăng ký không hợp lệ
+        {      
             if (register == null)
             {
                 return BadRequest("Invalid registration data.");
             }
-
-            // Kiểm tra xem tên người dùng đã tồn tại trong cơ sở dữ liệu chưa
-            var existingUser = await _userManager.FindByNameAsync(register.UserName);
+     
+            User? existingUser = await _userManager.FindByNameAsync(register.UserName);
             if (existingUser != null)
             {
                 return BadRequest(new RegisterResponse { Successful = false, Error = "Username already exists." });
             }
 
-            // Kiểm tra email đã tồn tại chưa
-            var existingEmail = await _userManager.FindByEmailAsync(register.Email);
+            User? existingEmail = await _userManager.FindByEmailAsync(register.Email);
             if (existingEmail != null)
             {
                 return BadRequest(new RegisterResponse { Successful = false, Error = "Email already exists." });
             }
 
-            // Tạo đối tượng người dùng mới
-            var user = new User
+            User user = new()
             {
                 UserName = register.UserName,
                 Email = register.Email
             };
 
-            // Tạo người dùng mới trong hệ thống và lưu mật khẩu
-            var result = await _userManager.CreateAsync(user, register.Password);
+            IdentityResult result = await _userManager.CreateAsync(user, register.Password);
             if (!result.Succeeded)
             {
                 return BadRequest(new RegisterResponse { Successful = false, Error = string.Join(", ", result.Errors.Select(e => e.Description)) });
             }
 
-            // Đăng ký thành công
             return Ok(new RegisterResponse { Successful = true, Message = "Registration successful!" });
         }
 
