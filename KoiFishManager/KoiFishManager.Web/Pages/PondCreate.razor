@@ -4,33 +4,33 @@
 @using KoiFishManager.Models
 @using KoiFishManager.Models.Pond
 
-<h3>Tạo Hồ Cá Mới</h3>
+<h3>Create New Pond</h3>
 
 <EditForm Model="@newPond" OnValidSubmit="OnCreatePond">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
     <div class="form-group">
-        <label for="name">Tên Hồ</label>
+        <label for="name">Pond Name</label>
         <InputText id="name" class="form-control" @bind-Value="newPond.Name" />
     </div>
 
     <div class="form-group">
-        <label for="size">Diện Tích (m²)</label>
+        <label for="size">Size (m²)</label>
         <InputNumber id="size" class="form-control" @bind-Value="newPond.Size" />
     </div>
 
     <div class="form-group">
-        <label for="depth">Độ Sâu (m)</label>
+        <label for="depth">Depth (m)</label>
         <InputNumber id="depth" class="form-control" @bind-Value="newPond.Depth" />
     </div>
 
     <div class="form-group">
-        <label for="waterQuality">Chất Lượng Nước</label>
+        <label for="waterQuality">Water Quality</label>
         <InputText id="waterQuality" class="form-control" @bind-Value="newPond.WaterQuality" />
     </div>
 
-    <button type="submit" class="btn btn-success">Tạo Hồ</button>
+    <button type="submit" class="btn btn-success">Create Pond</button>
 </EditForm>
 
 @code {

@@ -6,11 +6,11 @@
 @using KoiFishManager.Models.Pond
 @using KoiFishManager.Web.Components
 
-<h3>Danh sách Hồ Cá</h3>
+<h3>Pond List</h3>
 
 <!-- Create Pond Button -->
 <div class="col button-top">
-    <a href="/pondCreate" class="btn btn-success">Tạo Hồ Mới</a>
+    <a href="/pondCreate" class="btn btn-success">Create New Pond</a>
 </div>
 
 @if (pondList == null)
@@ -19,7 +19,7 @@
 }
 else if (pondList.Count == 0)
 {
-    <div>Không có hồ cá nào trong hệ thống.</div>
+    <div>No ponds in the system.</div>
 }
 else
 {
@@ -27,11 +27,11 @@ else
         <table class="table">
             <thead>
                 <tr>
-                    <th>Tên Hồ</th>
-                    <th>Diện Tích</th>
-                    <th>Độ Sâu</th>
-                    <th>Chất Lượng Nước</th>
-                    <th>Ngày Tạo</th>
+                    <th>Pond Name</th>
+                    <th>Size (m²)</th>
+                    <th>Depth (m)</th>
+                    <th>Water Quality</th>
+                    <th>Created At</th>
                     <th></th>
                 </tr>
             </thead>
@@ -45,9 +45,9 @@ else
                         <td>@pond.WaterQuality</td>
                         <td>@pond.CreatedAt.ToString(Configuration["DateTimeFormat"])</td>
                         <td>
-                            <a href="/pondDetails/@pond.Id" class="btn btn-primary">Chi Tiết</a>
-                            <a href="/pondEdit/@pond.Id" class="btn btn-warning">Sửa</a>
-                            <button class="btn btn-danger" @onclick="() => OnDeletePond(pond.Id)">Xóa</button>
+                            <a href="/pondDetails/@pond.Id" class="btn btn-primary">Details</a>
+                            <a href="/pondEdit/@pond.Id" class="btn btn-warning">Edit</a>
+                            <button class="btn btn-danger" @onclick="() => OnDeletePond(pond.Id)">Delete</button>
                         </td>
                     </tr>
                 }
@@ -57,8 +57,8 @@ else
 }
 
 <!-- Confirmation Modal -->
-<Confirmation ConfirmationMessage="Bạn có chắc chắn muốn xóa hồ cá này?"
-              ConfirmationTitle="Xóa Hồ Cá"
+<Confirmation ConfirmationMessage="Are you sure you want to delete this pond?"
+              ConfirmationTitle="Delete Pond"
               @ref="DeleteConfirmation"
               ConfirmationChanged="OnConfirmDeletePond">
 </Confirmation>

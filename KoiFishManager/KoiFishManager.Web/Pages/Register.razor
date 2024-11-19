@@ -15,7 +15,7 @@
 
 <div class="card">
     <div class="card-body">
-        <h5 class="card-title">Đăng ký tài khoản</h5>
+        <h5 class="card-title">Register Account</h5>
         <EditForm Model="RegisterModel" OnValidSubmit="HandleRegister">
             <DataAnnotationsValidator></DataAnnotationsValidator>
             <ValidationSummary></ValidationSummary>
@@ -38,38 +38,31 @@
                 <ValidationMessage For="()=> RegisterModel.Password"></ValidationMessage>
             </div>
 
-            <button type="submit" class="btn btn-primary">Đăng ký</button>
+            <button type="submit" class="btn btn-primary">Register</button>
         </EditForm>
     </div>
 </div>
 
 @code {
-    private bool ShowErrors;
-    private string Error = "";
     private RegisterRequest RegisterModel = new RegisterRequest();
+    private bool ShowErrors = false;
+    private string Error = string.Empty;
 
     private async Task HandleRegister()
     {
-        ShowErrors = false;
-        var response = await Http.PostAsJsonAsync("https://yourapi.com/register", RegisterModel);
+        // Attempt to register the user using the AuthService
+        var registerResponse = await AuthService.Register(RegisterModel);
 
-        if (response.IsSuccessStatusCode)
+        if (registerResponse.Successful)
         {
-            var result = await response.Content.ReadFromJsonAsync<RegisterResponse>();
-            if (result.Successful)
-            {
-                NavigationManager.NavigateTo("/login");
-            }
-            else
-            {
-                ShowErrors = true;
-                Error = result.Error;
-            }
+            // If registration is successful, navigate to the login page or home page
+            NavigationManager.NavigateTo("/login");
         }
         else
         {
+            // If registration fails, show the error message
             ShowErrors = true;
-            Error = "Có lỗi xảy ra khi đăng ký. Vui lòng thử lại.";
+            Error = registerResponse.Error;
         }
     }
 }

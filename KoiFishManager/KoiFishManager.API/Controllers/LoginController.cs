@@ -65,28 +65,46 @@ namespace KoiFishManager.Api.Controllers
         }
 
 
-        // API Đăng ký
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterRequest register)
         {
-            // Kiểm tra xem người dùng đã tồn tại chưa
+            // Kiểm tra nếu dữ liệu đăng ký không hợp lệ
+            if (register == null)
+            {
+                return BadRequest("Invalid registration data.");
+            }
+
+            // Kiểm tra xem tên người dùng đã tồn tại trong cơ sở dữ liệu chưa
             var existingUser = await _userManager.FindByNameAsync(register.UserName);
             if (existingUser != null)
+            {
                 return BadRequest(new RegisterResponse { Successful = false, Error = "Username already exists." });
+            }
 
-            // Tạo người dùng mới
+            // Kiểm tra email đã tồn tại chưa
+            var existingEmail = await _userManager.FindByEmailAsync(register.Email);
+            if (existingEmail != null)
+            {
+                return BadRequest(new RegisterResponse { Successful = false, Error = "Email already exists." });
+            }
+
+            // Tạo đối tượng người dùng mới
             var user = new User
             {
                 UserName = register.UserName,
                 Email = register.Email
             };
 
+            // Tạo người dùng mới trong hệ thống và lưu mật khẩu
             var result = await _userManager.CreateAsync(user, register.Password);
-
             if (!result.Succeeded)
+            {
                 return BadRequest(new RegisterResponse { Successful = false, Error = string.Join(", ", result.Errors.Select(e => e.Description)) });
+            }
 
-            return Ok(new RegisterResponse { Successful = true, Message = "User created successfully." });
+            // Đăng ký thành công
+            return Ok(new RegisterResponse { Successful = true, Message = "Registration successful!" });
         }
+
     }
 }

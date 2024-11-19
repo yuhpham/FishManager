@@ -439,7 +439,7 @@ namespace KoiFishManager.API.Migrations
             modelBuilder.Entity("KoiFishManager.Api.Entities.Pond", b =>
                 {
                     b.HasOne("KoiFishManager.Api.Entities.User", "User")
-                        .WithMany()
+                        .WithMany("Ponds")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -516,6 +516,11 @@ namespace KoiFishManager.API.Migrations
                     b.Navigation("KoiFishes");
 
                     b.Navigation("PondStatuses");
+                });
+
+            modelBuilder.Entity("KoiFishManager.Api.Entities.User", b =>
+                {
+                    b.Navigation("Ponds");
                 });
 #pragma warning restore 612, 618
         }

@@ -10,7 +10,7 @@
 
 <!-- Create Koi Fish Button -->
 <div class="col button-top">
-    <a href="/koiFishCreate" class="btn btn-success">Thêm Cá Koi Mới</a>
+    <a href="/koiFishCreate" class="btn btn-success">Add New Koi Fish</a>
 </div>
 
 @if (koiFishList == null)
@@ -19,7 +19,7 @@
 }
 else if (koiFishList.Count == 0)
 {
-    <div>Không có cá koi nào trong hệ thống.</div>
+    <div>No koi fish in the system.</div>
 }
 else
 {
@@ -31,8 +31,8 @@ else
                     <th>Color</th>
                     <th>Size</th>
                     <th>Origin</th>
-                    <th>HealthStatus</th>
-                    <th>CreatedAt</th>
+                    <th>Health Status</th>
+                    <th>Created At</th>
                     <th></th>
                 </tr>
             </thead>
@@ -47,9 +47,9 @@ else
                         <td>@koiFish.HealthStatus</td>
                         <td>@koiFish.CreatedAt.ToString(Configuration["DateTimeFormat"])</td>
                         <td>
-                            <a href="/koiFishDetails/@koiFish.Id" class="btn btn-primary">Chi Tiết</a>
-                            <a href="/koiFishEdit/@koiFish.Id" class="btn btn-warning">Sửa</a>
-                            <button class="btn btn-danger" @onclick="() => OnDeleteKoiFish(koiFish.Id)">Xóa</button>
+                            <a href="/koiFishDetails/@koiFish.Id" class="btn btn-primary">Details</a>
+                            <a href="/koiFishEdit/@koiFish.Id" class="btn btn-warning">Edit</a>
+                            <button class="btn btn-danger" @onclick="() => OnDeleteKoiFish(koiFish.Id)">Delete</button>
                         </td>
                     </tr>
                 }
@@ -59,8 +59,8 @@ else
 }
 
 <!-- Confirmation Modal -->
-<Confirmation ConfirmationMessage="Bạn có chắc chắn muốn xóa cá koi này?"
-              ConfirmationTitle="Xóa Cá Koi"
+<Confirmation ConfirmationMessage="Are you sure you want to delete this koi fish?"
+              ConfirmationTitle="Delete Koi Fish"
               @ref="DeleteConfirmation"
               ConfirmationChanged="OnConfirmDeleteKoiFish">
 </Confirmation>

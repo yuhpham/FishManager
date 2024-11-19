@@ -46,5 +46,19 @@ namespace KoiFishManager.Web.Services
             ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
             _httpClient.DefaultRequestHeaders.Authorization = null;
         }
+
+        public async Task<RegisterResponse> Register(RegisterRequest registerRequest)
+        {
+            // Send POST request to register API
+            HttpResponseMessage result = await _httpClient.PostAsJsonAsync("/api/login/register", registerRequest);
+            string content = await result.Content.ReadAsStringAsync();
+            RegisterResponse? registerResponse = JsonSerializer.Deserialize<RegisterResponse>(content,
+                new JsonSerializerOptions()
+                {
+                    PropertyNameCaseInsensitive = true
+                });
+
+            return registerResponse;
+        }
     }
 }
