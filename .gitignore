@@ -11,3 +11,5 @@
 /KoiFishManager/KoiFishManager.API/obj
 /KoiFishManager/KoiFishManager.Models/obj
 /KoiFishManager/KoiFishManager.Web/obj
+/KoiFishManager/KoiFishManager.Web/bin/Debug/net8.0
+/KoiFishManager/KoiFishManager.Models/bin/Debug/net8.0
