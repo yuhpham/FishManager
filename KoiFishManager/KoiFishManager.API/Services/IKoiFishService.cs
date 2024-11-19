@@ -10,7 +10,7 @@ namespace KoiFishManager.API.Services
         
         Task<List<KoiFishResponse>> GetAllByUserIdAsync(Guid id);
 
-        Task<KoiFishResponse> GetByIdAsync(int id);
+        Task<KoiFishDetailResponse> GetByIdAsync(int id);
 
         // Cập nhật thông tin cá koi
         Task<KoiFishResponse> UpdateAsync(int id, KoiFishRequest request);

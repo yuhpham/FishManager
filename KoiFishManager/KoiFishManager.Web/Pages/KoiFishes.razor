@@ -1,4 +1,4 @@
-﻿@page "/koifishs"
+﻿@page "/koifishes"
 @inject IKoiFishService KoiFishService
 @inject NavigationManager Navigation
 @inject IConfiguration Configuration
@@ -6,7 +6,7 @@
 @using KoiFishManager.Models.KoiFish
 @using KoiFishManager.Web.Components
 
-<h3>Danh sách Cá Koi</h3>
+<h3> Koi Fish List</h3>
 
 <!-- Create Koi Fish Button -->
 <div class="col button-top">
@@ -27,12 +27,12 @@ else
         <table class="table">
             <thead>
                 <tr>
-                    <th>Tên Cá</th>
-                    <th>Loại Cá</th>
-                    <th>Ngày Sinh</th>
-                    <th>Chất Lượng Nước</th>
-                    <th>Ngày Tạo</th>
-                    <th>Ngày Tạo</th>
+                    <th>Name</th>
+                    <th>Color</th>
+                    <th>Size</th>
+                    <th>Origin</th>
+                    <th>HealthStatus</th>
+                    <th>CreatedAt</th>
                     <th></th>
                 </tr>
             </thead>

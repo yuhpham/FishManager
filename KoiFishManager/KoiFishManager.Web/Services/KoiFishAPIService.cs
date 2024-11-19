@@ -13,31 +13,32 @@ namespace KoiFishManager.Web.Services
         }
 
         // Thêm cá koi mới vào hồ
-        public async Task<KoiFishResponse> AddKoiFishAsync(int pondId, KoiFishRequest request)
+        public async Task<bool> AddKoiFishAsync(int pondId, KoiFishRequest request)
         {
             HttpResponseMessage response = await _httpClient.PostAsJsonAsync($"api/koiFish/{pondId}", request);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<KoiFishResponse>();
+
+            // Kiểm tra nếu mã trạng thái HTTP là thành công (2xx)
+            return response.IsSuccessStatusCode;
         }
 
         // Lấy tất cả cá koi của người dùng
         public async Task<List<KoiFishResponse>> GetAllKoiFishByUserIdAsync()
         {
-            return await _httpClient.GetFromJsonAsync<List<KoiFishResponse>>("api/koiFish");
+            return await _httpClient.GetFromJsonAsync<List<KoiFishResponse>>("api/KoiFish");
         }
 
         // Lấy cá koi theo ID
-        public async Task<KoiFishResponse> GetKoiFishByIdAsync(int id)
+        public async Task<KoiFishDetailResponse> GetKoiFishByIdAsync(int id)
         {
-            return await _httpClient.GetFromJsonAsync<KoiFishResponse>($"api/koiFish/{id}");
+            return await _httpClient.GetFromJsonAsync<KoiFishDetailResponse>($"api/koiFish/{id}");
         }
 
         // Cập nhật thông tin cá koi
-        public async Task<KoiFishResponse> UpdateKoiFishAsync(int id, KoiFishRequest request)
+        public async Task<bool> UpdateKoiFishAsync(int id, KoiFishRequest request)
         {
             HttpResponseMessage response = await _httpClient.PutAsJsonAsync($"api/koiFish/{id}", request);
-            response.EnsureSuccessStatusCode();
-            return await response.Content.ReadFromJsonAsync<KoiFishResponse>();
+
+            return response.IsSuccessStatusCode;
         }
 
         // Xóa cá koi

@@ -9,10 +9,10 @@ namespace KoiFishManager.Models
 {
     public class LoginRequest
     {
-        [Required]
+        [Required(ErrorMessage = "Username is required.")]
         public string UserName { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = "Password is required.")]
         public string Password { get; set; } = string.Empty;
     }
 }

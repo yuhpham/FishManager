@@ -23,7 +23,6 @@ namespace KoiFishManager.Api.Services
             _logger = logger;
         }
 
-        // Thêm hồ cá mới
         public async Task<PondResponse> AddAsync(Guid userId, PondRequest request)
         {
             try
@@ -52,7 +51,7 @@ namespace KoiFishManager.Api.Services
             }
         }
 
-        // Lấy danh sách hồ cá của người dùng
+      
         public async Task<List<PondResponse>> GetAllByUserIdAsync(Guid userId)
         {
             try
@@ -73,7 +72,7 @@ namespace KoiFishManager.Api.Services
             }
         }
 
-        // Lấy thông tin hồ cá theo ID
+        
         public async Task<PondResponse> GetByIdAsync(int id)
         {
             try
@@ -99,7 +98,7 @@ namespace KoiFishManager.Api.Services
             }
         }
 
-        // Phân trang hồ cá theo người dùng
+       
         public async Task<PagedResult<PondResponse>> GetPagedByUserIdAsync(Guid userId, int page, int pageSize)
         {
             try
@@ -133,7 +132,7 @@ namespace KoiFishManager.Api.Services
             }
         }
 
-        // Cập nhật thông tin hồ cá
+       
         public async Task<PondResponse> UpdateAsync(int id, PondRequest request)
         {
             try
@@ -161,7 +160,7 @@ namespace KoiFishManager.Api.Services
             }
         }
 
-        // Xóa hồ cá
+       
         public async Task<bool> DeleteAsync(int id)
         {
             try
@@ -183,7 +182,7 @@ namespace KoiFishManager.Api.Services
             }
         }
 
-        // Chuyển đổi thông tin hồ cá sang DTO
+        
         private PondResponse ToDto(Pond pond)
         {
             return new PondResponse

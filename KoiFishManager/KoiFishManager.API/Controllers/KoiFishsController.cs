@@ -2,6 +2,8 @@
 using KoiFishManager.Api.Services;
 using KoiFishManager.API.Services;
 using KoiFishManager.Models.KoiFish;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,7 @@ namespace KoiFishManager.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class KoiFishController : ControllerBase
     {
         private readonly IKoiFishService _koiFishService;
@@ -44,9 +47,10 @@ namespace KoiFishManager.API.Controllers
         [HttpGet()]
         public async Task<ActionResult<List<KoiFishResponse>>> GetAllKoiFishByUserIdAsync()
         {
+            var userId = _userContextService.GetCurrentUserId();
             try
             {
-                var userId = _userContextService.GetCurrentUserId();
+               
                 var response = await _koiFishService.GetAllByUserIdAsync(userId);
                 if (response == null || response.Count == 0)
                 {
@@ -62,7 +66,7 @@ namespace KoiFishManager.API.Controllers
 
         // Lấy cá koi theo ID
         [HttpGet("{id}")]
-        public async Task<ActionResult<KoiFishResponse>> GetKoiFishByIdAsync(int id)
+        public async Task<ActionResult<KoiFishDetailResponse>> GetKoiFishByIdAsync(int id)
         {
             try
             {

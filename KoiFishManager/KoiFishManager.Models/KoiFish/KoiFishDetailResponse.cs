@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KoiFishManager.Models.KoiFish
 {
-    public class KoiFishDetailReponse
+    public class KoiFishDetailResponse
     {
         public int Id { get; set; } // ID cá Koi
         public string Name { get; set; } // Tên cá Koi
@@ -15,6 +15,8 @@ namespace KoiFishManager.Models.KoiFish
         public string Origin { get; set; } // Xuất xứ
         public string HealthStatus { get; set; } // Tình trạng sức khỏe
         public int PondId { get; set; } // Mã hồ cá
-        public string PondName { get; set; } // Tên hồ cá
+        public PondDto  Pond { get; set; } // Tên hồ cá
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }

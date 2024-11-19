@@ -1,0 +1,50 @@
+﻿@page "/koiFishDetails/{Id:int}"
+@inject IKoiFishService KoiFishService
+@inject NavigationManager Navigation
+@inject IConfiguration Configuration
+@using KoiFishManager.Models
+@using KoiFishManager.Models.KoiFish
+
+<h3>Chi Tiết Koi Fish</h3>
+
+@if (koiFish == null)
+{
+    <LoadingIndicator></LoadingIndicator>
+}
+else
+{
+    <div>
+        <h4>@koiFish.Name</h4>
+        <p><strong>Color:</strong> @koiFish.Color</p>
+        <p><strong>Size:</strong> @koiFish.Size cm</p>
+        <p><strong>Origin:</strong> @koiFish.Origin</p>
+        <p><strong>Health Status:</strong> @koiFish.HealthStatus</p>
+        <p><strong>Created At:</strong> @koiFish.CreatedAt.ToString(Configuration["DateTimeFormat"])</p>
+        <p><strong>Updated At:</strong> @koiFish.UpdatedAt.ToString(Configuration["DateTimeFormat"])</p>
+    </div>
+
+    <!-- Display Pond Information -->
+    <div>
+        <h5>Pond Information</h5>
+        <p><strong>Pond Name:</strong> @koiFish.Pond?.Name</p>
+        <p><strong>Pond Size:</strong> @koiFish.Pond?.Size m²</p>
+        <p><strong>Pond Depth:</strong> @koiFish.Pond?.Depth m</p>
+    </div>
+
+   
+ 
+
+    <div class="mt-4">
+        <a href="/KoiFishes" class="btn btn-primary">Back To KoiFish List</a>
+    </div>
+}
+
+@code {
+    [Parameter] public int Id { get; set; }
+    private KoiFishDetailResponse koiFish = new KoiFishDetailResponse();
+
+    protected override async Task OnInitializedAsync()
+    {
+        koiFish = await KoiFishService.GetKoiFishByIdAsync(Id);
+    }
+}
