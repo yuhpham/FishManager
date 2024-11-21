@@ -2,11 +2,6 @@
 using KoiFishManager.Api.Entities;
 using KoiFishManager.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
 using KoiFishManager.Models.Pond;
 using KoiFishManager.Models.KoiFish;
 
@@ -70,9 +65,7 @@ namespace KoiFishManager.Api.Services
                 _logger.LogError(ex, "An error occurred while fetching ponds for user {UserId}.", userId);
                 throw;
             }
-        }
-
-        
+        }      
         public async Task<PondResponse> GetByIdAsync(int id)
         {
             try

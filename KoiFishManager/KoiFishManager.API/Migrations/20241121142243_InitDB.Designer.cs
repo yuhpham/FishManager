@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace KoiFishManager.API.Migrations
 {
     [DbContext(typeof(KoiFishManagerDbContext))]
-    [Migration("20241119155218_UpdateDB")]
-    partial class UpdateDB
+    [Migration("20241121142243_InitDB")]
+    partial class InitDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
